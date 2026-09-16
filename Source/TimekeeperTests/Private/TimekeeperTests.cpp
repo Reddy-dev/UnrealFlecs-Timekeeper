@@ -57,12 +57,10 @@ public:
 
 		System->RunSystem(2.5);
 
-		const FFlecsTKTickCountComponent* TickCount = Entity.Get<FFlecsTKTickCountComponent>();
-		const FFlecsTKRateAccumulator* Accumulator = Entity.Get<FFlecsTKRateAccumulator>();
-		ASSERT_THAT(IsNotNull(TickCount));
-		ASSERT_THAT(IsNotNull(Accumulator));
-		ASSERT_THAT(AreEqual(int64{16}, TickCount->TickCount));
-		ASSERT_THAT(IsTrue(FMath::IsNearlyEqual(Accumulator->AccumulatedTime, 0.75)));
+		const FFlecsTKTickCountComponent& TickCount = Entity.Get<FFlecsTKTickCountComponent>();
+		const FFlecsTKRateAccumulator& Accumulator = Entity.Get<FFlecsTKRateAccumulator>();
+		ASSERT_THAT(AreEqual(int64{16}, TickCount.TickCount));
+		ASSERT_THAT(IsTrue(FMath::IsNearlyEqual(Accumulator.AccumulatedTime, 0.75)));
 	}
 
 	TEST_METHOD(AccumulatorWaitsUntilTickRateIsReached)
@@ -74,12 +72,10 @@ public:
 
 		System->RunSystem(0.5);
 
-		const FFlecsTKTickCountComponent* TickCount = Entity.Get<FFlecsTKTickCountComponent>();
-		const FFlecsTKRateAccumulator* Accumulator = Entity.Get<FFlecsTKRateAccumulator>();
-		ASSERT_THAT(IsNotNull(TickCount));
-		ASSERT_THAT(IsNotNull(Accumulator));
-		ASSERT_THAT(AreEqual(int64{42}, TickCount->TickCount));
-		ASSERT_THAT(IsTrue(FMath::IsNearlyEqual(Accumulator->AccumulatedTime, 0.6)));
+		const FFlecsTKTickCountComponent& TickCount = Entity.Get<FFlecsTKTickCountComponent>();
+		const FFlecsTKRateAccumulator& Accumulator = Entity.Get<FFlecsTKRateAccumulator>();
+		ASSERT_THAT(AreEqual(int64{42}, TickCount.TickCount));
+		ASSERT_THAT(IsTrue(FMath::IsNearlyEqual(Accumulator.AccumulatedTime, 0.6)));
 	}
 
 	TEST_METHOD(EndTickSystemEmitsOnlyForReachedEndTicks)
