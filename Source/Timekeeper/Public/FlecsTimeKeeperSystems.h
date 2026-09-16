@@ -18,3 +18,16 @@ public:
 	virtual void RunEachIterator(const TSolidNotNull<UFlecsWorldInterfaceObject*> InWorld, flecs::iter& InIterator) override;
 	
 }; // class UFlecsTKAccumulatorSystem
+
+UCLASS()
+class UFlecsTKEndTickCountSystem : public UFlecsSystemObject
+{
+	GENERATED_BODY()
+
+public:
+	UFlecsTKEndTickCountSystem(const FObjectInitializer& ObjectInitializer);
+	
+	virtual void BuildSystem(const TSolidNotNull<const UFlecsWorldInterfaceObject*> InWorld, TFlecsSystemBuilder<>& InBuilder) const override;
+	virtual void RunEachIterator(const TSolidNotNull<UFlecsWorldInterfaceObject*> InWorld, flecs::iter& InIterator) override;
+	
+}; // class UFlecsTKAccumulatorSystem

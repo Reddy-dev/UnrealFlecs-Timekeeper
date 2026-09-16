@@ -11,8 +11,16 @@ struct FFlecsTKTickCountComponent
 	GENERATED_BODY()
 	
 public:
+		
 	UPROPERTY()
 	int64 TickCount;
+	
+	UPROPERTY()
+	int64 StartTickCount;
+	
+	// INDEX_NONE means unbound
+	UPROPERTY()
+	int64 EndTickCount = INDEX_NONE;
 	
 	NO_DISCARD FDateTime ToDateTime() const;
 	
@@ -24,32 +32,40 @@ FLECS_COMPONENT_TRAITS(FFlecsTKTickCountComponent)
 }; // struct FLECS_COMPONENT_TRAITS(FFlecsTKTickCountComponent)
 
 USTRUCT()
-struct FFlecsTKTickCountEndComponent
+struct FFlecsTKEndTickCountComponent
 {
 	GENERATED_BODY()
 	
 public:
 	UPROPERTY()
 	int64 EndTickCount;
-}; // struct FFlecsTKTickCountEndComponent 
+}; // struct FFlecsTKEndTickCountComponent
 
-FLECS_COMPONENT_TRAITS(FFlecsTKTickCountEndComponent)
+FLECS_COMPONENT_TRAITS(FFlecsTKEndTickCountComponent)
 {
 	using WithTypes = TTuple<FFlecsTKTickCountComponent>;
-}; // struct FLECS_COMPONENT_TRAITS(FFlecsTKTickCountEndComponent)
+}; // struct FLECS_COMPONENT_TRAITS(FFlecsTKEndTickCountComponent)
 
 // is the component necessary for automatic tick
 USTRUCT()
-struct FFlecsTKAccumulator
+struct FFlecsTKRateAccumulator
 {
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY()
-	float AccumulatedTime;
-}; // struct FFlecsTKAccumulator 
-
-FLECS_COMPONENT_TRAITS(FFlecsTKAccumulator)
-{
 	
-}; // struct FLECS_COMPONENT_TRAITS(FFlecsTKAccumulator)
+	UPROPERTY()
+	double AccumulatedTime;
+	
+	UPROPERTY()
+	double TickRate;
+	
+	UPROPERTY()
+	int64 TickCountPerRate = 1;
+	
+}; // struct FFlecsTKRateAccumulator 
+
+FLECS_COMPONENT_TRAITS(FFlecsTKRateAccumulator)
+{
+	using WithTypes = TTuple<FFlecsTKTickCountComponent>;
+}; // struct FLECS_COMPONENT_TRAITS(FFlecsTKRateAccumulator)

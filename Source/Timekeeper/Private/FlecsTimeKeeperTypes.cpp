@@ -5,7 +5,8 @@
 #include UE_INLINE_GENERATED_CPP_BY_NAME(FlecsTimeKeeperTypes)
 
 REGISTER_FLECS_COMPONENT(FFlecsTKTickCountComponent);
-REGISTER_FLECS_COMPONENT(FFlecsTKAccumulator);
+REGISTER_FLECS_COMPONENT(FFlecsTKEndTickCountComponent);
+REGISTER_FLECS_COMPONENT(FFlecsTKRateAccumulator);
 
 FDateTime FFlecsTKTickCountComponent::ToDateTime() const
 {
