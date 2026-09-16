@@ -7,7 +7,7 @@
 #include "FlecsTimeKeeperTypes.generated.h"
 
 USTRUCT()
-struct FFlecsTKTickCountComponent
+struct TIMEKEEPER_API FFlecsTKTickCountComponent
 {
 	GENERATED_BODY()
 	
@@ -28,7 +28,7 @@ FLECS_COMPONENT_TRAITS(FFlecsTKTickCountComponent)
 }; // struct FLECS_COMPONENT_TRAITS(FFlecsTKTickCountComponent)
 
 USTRUCT()
-struct FFlecsTKEndTickCountComponent
+struct TIMEKEEPER_API FFlecsTKEndTickCountComponent
 {
 	GENERATED_BODY()
 	
@@ -44,7 +44,7 @@ FLECS_COMPONENT_TRAITS(FFlecsTKEndTickCountComponent)
 
 // is the component necessary for automatic tick
 USTRUCT()
-struct FFlecsTKRateAccumulator
+struct TIMEKEEPER_API FFlecsTKRateAccumulator
 {
 	GENERATED_BODY()
 	
