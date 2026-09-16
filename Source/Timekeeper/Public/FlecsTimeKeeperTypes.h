@@ -1,7 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-#include "Components/ObjectTypes/FFlecsSceneComponentTag.h"
+
+#include "Properties/FlecsComponentProperties.h"
 
 #include "FlecsTimeKeeperTypes.generated.h"
 

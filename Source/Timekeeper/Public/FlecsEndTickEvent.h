@@ -7,7 +7,7 @@
 #include "FlecsEndTickEvent.generated.h"
 
 USTRUCT(BlueprintType)
-struct FFlecsEndTickEvent
+struct TIMEKEEPER_API FFlecsEndTickEvent
 {
 	GENERATED_BODY()
 	

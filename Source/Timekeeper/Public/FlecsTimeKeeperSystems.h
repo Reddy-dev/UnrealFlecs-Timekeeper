@@ -7,7 +7,7 @@
 #include "FlecsTimeKeeperSystems.generated.h"
 
 UCLASS()
-class UFlecsTKAccumulatorSystem : public UFlecsSystemObject
+class TIMEKEEPER_API UFlecsTKAccumulatorSystem : public UFlecsSystemObject
 {
 	GENERATED_BODY()
 
@@ -20,7 +20,7 @@ public:
 }; // class UFlecsTKAccumulatorSystem
 
 UCLASS()
-class UFlecsTKEndTickCountSystem : public UFlecsSystemObject
+class TIMEKEEPER_API UFlecsTKEndTickCountSystem : public UFlecsSystemObject
 {
 	GENERATED_BODY()
 
