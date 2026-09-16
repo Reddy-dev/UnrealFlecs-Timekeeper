@@ -11,16 +11,11 @@ struct FFlecsTKTickCountComponent
 	GENERATED_BODY()
 	
 public:
-		
 	UPROPERTY()
 	int64 TickCount;
 	
 	UPROPERTY()
 	int64 StartTickCount;
-	
-	// INDEX_NONE means unbound
-	UPROPERTY()
-	int64 EndTickCount = INDEX_NONE;
 	
 	NO_DISCARD FDateTime ToDateTime() const;
 	

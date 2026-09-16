@@ -2,6 +2,7 @@
 
 #include "FlecsTimeKeeperSystems.h"
 
+#include "FlecsEndTickEvent.h"
 #include "FlecsTimeKeeperTypes.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(FlecsTimeKeeperSystems)
@@ -51,11 +52,45 @@ UFlecsTKEndTickCountSystem::UFlecsTKEndTickCountSystem(const FObjectInitializer&
 void UFlecsTKEndTickCountSystem::BuildSystem(const TSolidNotNull<const UFlecsWorldInterfaceObject*> InWorld,
 	TFlecsSystemBuilder<>& InBuilder) const
 {
+	InBuilder
+		.Phase(EFlecsPhaseType::PostFrame)
+		.With<const FFlecsTKTickCountComponent>() // 0
+		.With<const FFlecsTKEndTickCountComponent>() // 1
+		.Write(flecs::Wildcard)
+		.DetectChanges();
+}
+
+void UFlecsTKEndTickCountSystem::OnBuildSystem(const FFlecsSystemHandle& InSystemHandle)
+{
+	Super::OnBuildSystem(InSystemHandle);
 	
+	//InSystemHandle.AddPair(flecs::DependsOn, 
 }
 
 void UFlecsTKEndTickCountSystem::RunEachIterator(const TSolidNotNull<UFlecsWorldInterfaceObject*> InWorld,
-	flecs::iter& InIterator)
+                                                 flecs::iter& InIterator)
 {
+	if (!InIterator.changed())
+	{
+		InIterator.next();
+		return;
+	}
 	
+	const auto TickCountComponent
+		= InIterator.field<const FFlecsTKTickCountComponent>(0);
+	const auto EndTickCountComponent 
+		= InIterator.field<const FFlecsTKEndTickCountComponent>(1);
+	
+	for (const FFlecsId EntityIndex : InIterator)
+	{
+		const auto& [TickCount, StartTickCount] = TickCountComponent[EntityIndex];
+		const auto& [EndTickCount] = EndTickCountComponent[EntityIndex];
+		
+		const FFlecsEntityHandle EntityHandle = InIterator.entity(EntityIndex);
+		
+		if (TickCount >= EndTickCount)
+		{
+			EntityHandle.Emit<FFlecsEndTickEvent>();
+		}
+	}
 }

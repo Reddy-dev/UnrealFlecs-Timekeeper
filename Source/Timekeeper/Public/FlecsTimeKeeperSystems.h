@@ -28,6 +28,10 @@ public:
 	UFlecsTKEndTickCountSystem(const FObjectInitializer& ObjectInitializer);
 	
 	virtual void BuildSystem(const TSolidNotNull<const UFlecsWorldInterfaceObject*> InWorld, TFlecsSystemBuilder<>& InBuilder) const override;
+	
+	// @TODO: this is a temp for when we have depends on in the builder api
+	virtual void OnBuildSystem(const FFlecsSystemHandle& InSystemHandle) override;
+	
 	virtual void RunEachIterator(const TSolidNotNull<UFlecsWorldInterfaceObject*> InWorld, flecs::iter& InIterator) override;
 	
 }; // class UFlecsTKAccumulatorSystem
